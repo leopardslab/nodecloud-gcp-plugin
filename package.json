@@ -1,0 +1,28 @@
+{
+  "name": "nodecloud-gcp",
+  "version": "1.0.0",
+  "description": "GCP Wrapper for NodeCloud Core",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudlibz/nodecloud-gcp.git"
+  },
+  "keywords": [
+    "nodecloud",
+    "aws",
+    "gcp",
+    "nodecloud-core"
+  ],
+  "author": "Scorelab",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cloudlibz/nodecloud-gcp/issues"
+  },
+  "homepage": "https://github.com/cloudlibz/nodecloud-gcp#readme",
+  "dependencies": {
+    "google-cloud": "^0.57.0"
+  }
+}
