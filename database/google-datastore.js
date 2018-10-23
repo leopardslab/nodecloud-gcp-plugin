@@ -44,10 +44,7 @@ class GCD {
     const { data } = params;
 
     // update record / item
-    return this._gcd.save({
-      key,
-      data,
-    });
+    return this._gcd.save({key,data});
   }
   /**
    * Get query object
