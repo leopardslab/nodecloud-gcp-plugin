@@ -4,6 +4,7 @@ const GoogleStorage = require('./storage/google-compute');
 const GoogleStorageBucket = require('./storage/google-storage');
 const GoogleDNS = require('./network/google-dns');
 const GoogleDatastore = require('./database/google-datastore');
+const config = require("./example.data")
 
 class Google {
   /**
@@ -73,6 +74,10 @@ class Google {
   googleDatastore(params) {
     return new GoogleDatastore(this.getSDK());
   }
-}
+};
 
+function initGoogle(config) {
+  return new Google(config);
+};
+initGoogle(config);
 module.exports = Google;
