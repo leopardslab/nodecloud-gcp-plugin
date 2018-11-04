@@ -25,7 +25,7 @@ class GoogleCompute {
     // create GCP VM
     return new Promise((resolve, reject) => {
       zone.createVM(name, { os: params.os }, (err, vm, operation) => {
-        if (err) reject(err);
+        if (err) { reject(err); return; }
         operation
           .on('error', (error) => {
             reject(error);
