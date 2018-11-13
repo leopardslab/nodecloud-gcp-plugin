@@ -1,16 +1,36 @@
-# Nodecloud Google Cloud Plugin
-Google Cloud plugin for [Nodecloud-core](https://github.com/cloudlibz/nodecloud-core)
+# nodecloud-gcp-plugin
+Google Cloud plugin for [nodecloud](https://github.com/cloudlibz/nodecloud-core)
 
-## How to setup
-You should have .nc.config.js file in root of your project. 
-.nc.config.js can contain multiple providers, actually three are supported - Azure, Google and AWS.
+## 🚀 Install
 
-Content of .nc.config.js is following:
-1. `name`: name of the provider
-2. `tag`: tag of the provider, it's only for your reference
-3. `libName`: name of the provider library. IMPORTANT: you actually have to install library by yourself. Currently there are three: [Azure](https://github.com/cloudlibz/nodecloud-azure-plugin), [AWS](https://github.com/cloudlibz/nodecloud-aws-plugin), [Google Cloud](https://github.com/cloudlibz/nodecloud-gcp-plugin)
+```
+$ npm install nodecloud-gcp-plugin
+```
 
-Here is how should example .nc.config file for Google Cloud look: 
+## ✌️ How to setup
+
+- Download keyFile from GCP console
+- Set environment variables
+
+```
+GCLOUD_PROJECT='nodecloud-demo',
+GCLOUD_KEY_FILE_NAME='xxxxxxxxxxx'
+```
+
+Use same key names as they are used in this plugin implementation.
+
+Make sure you have `.nc.config` file in the project root and have `nodecloud-core` installed.
+
+Content of `.nc.config` file is assumed as the following json structure.
+It is an array of supported providers.
+
+1.  `name` : It is the provider name which nodecloud-core supports.
+2.  `tag` : It is the name that you will use to load the given provider. It is for your reference in code. It can be anything that you may like.
+3.  `libName` : It is the name of the library which has to be installed before loading a provider.
+
+Config file can contain array of objects for all providers and all will be loaded.
+Supported values for `name` : Azure, google, AWS
+
 ```js
 const providers = [
     {
@@ -22,7 +42,7 @@ const providers = [
             keyFilename: "ABSOLUTE_PATH_TO_SERVICE_KEY"
         }
     },
-    // other providers might go here
+    // other providers might be included here
 ]
 
 module.exports = providers;
@@ -32,9 +52,12 @@ Here is how to obtain a service [key](https://cloud.google.com/iam/docs/creating
 
 Remember that you need to give this service account appropiate roles!
 
-##Project structure
+## 💻 Development
 
-- `/compute` - contains code about Compute Engine
-- `/database` - code about Google Datastore
-- `/network` - code about Google DNS Services
-- `/storage` - code about Google Storage
+```
+$ git clone https://github.com/cloudliz/nodecloud-gcp-plugin
+$ cd nodecloud-gcp-plugin
+$ npm link
+$ cd nodecloud-core
+$ npm link nodecloud-gcp-plugin
+```
