@@ -1,5 +1,5 @@
 # nodecloud-gcp-plugin
-Google Cloud plugin for [nodecloud](https://github.com/cloudlibz/nodecloud-core)
+Google Cloud plugin for [nodecloud](https://github.com/cloudlibz/nodecloud)
 
 ## 🚀 Install
 
@@ -24,12 +24,12 @@ Make sure you have `.nc.config` file in the project root and have `nodecloud-cor
 Content of `.nc.config` file is assumed as the following json structure.
 It is an array of supported providers.
 
-1.  `name` : It is the provider name which nodecloud-core supports.
-2.  `tag` : It is the name that you will use to load the given provider. It is for your reference in code. It can be anything that you may like.
-3.  `libName` : It is the name of the library which has to be installed before loading a provider.
+1.  `name` : Provider name which nodecloud supports.
+2.  `tag` : Name that you will use to load the given provider. It is for your reference in code. It can be anything that you may like.
+3.  `libName` : Library name which has to be installed before loading a provider.
 
 Config file can contain array of objects for all providers and all will be loaded.
-Supported values for `name` : Azure, google, AWS
+Supported values for `name` : azure, google, aws
 
 ```js
 const providers = [
@@ -58,6 +58,7 @@ Remember that you need to give this service account appropiate roles!
 $ git clone https://github.com/cloudliz/nodecloud-gcp-plugin
 $ cd nodecloud-gcp-plugin
 $ npm link
-$ cd nodecloud-core
+$ git clone https://github.com/cloudliz/nodecloud
+$ cd nodecloud
 $ npm link nodecloud-gcp-plugin
 ```
