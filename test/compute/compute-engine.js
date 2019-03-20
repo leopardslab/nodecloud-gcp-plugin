@@ -12,38 +12,66 @@ const ce = ncGcpPlugin.compute(options);
 
 console.log(ce);
 
-describe("AWS EC2", () => {
-  it("should list all EC2 instance", done => {
+describe("GCP Compute engine", () => {
+  it("should list all compute instance", done => {
     const params = {
       DryRun: false
     };
+    ce.list(params)
+      .then(res => {
+        assert.typeOf(res, "object");
+        done();
+      })
+      .catch(err => {
+        console.log("Err", err);
+      });
   });
 
-  it("should start EC2 instance", done => {
+  it("should start compute instance", done => {
     const params = {
-      InstanceIds: ["i-03fe236b187a898b6"],
-      DryRun: true
+      zone: "",
+      vmName: ""
     };
+    ec.start(params).then(res => {
+      done();
+    });
   });
 
-  it("should stop EC2 instance", done => {
+  it("should stop compute instance", done => {
     const params = {
-      InstanceIds: ["i-03fe236b187a898b6"],
-      DryRun: true
+      zone: "",
+      vmName: ""
     };
+    ec.stop(params).then(res => {
+      assert.typeOf(res, "array");
+      done();
+    });
   });
 
-  it("should reboot EC2 instance", done => {
+  it("should reboot compute instance", done => {
     const params = {
-      InstanceIds: ["i-03fe236b187a898b6"],
-      DryRun: true
+      zone: "",
+      vmName: ""
     };
+    ec.reboot(params).then(res => {
+      assert.typeOf(res, "object");
+      done();
+    });
   });
 
-  it("should terminate/destroy EC2 instance", done => {
+  it("should terminate/destroy compute instance", done => {
     const params = {
-      InstanceIds: ["i-0de2ae0ba47d4f3f3"],
-      DryRun: false
+      zone: "",
+      vmName: ""
     };
+    ec.destroy(params)
+      .then(res => {
+        assert.typeOf(res, "object");
+        done();
+      })
+      .catch(err => {
+        console.log(err);
+        done();
+      });
   });
 });

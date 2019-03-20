@@ -11,7 +11,7 @@ const ncGcpPlugin = new gcpPlugin(options);
 const cs = ncAwsPlugin.bucket(options);
 
 describe("GCP CLOUD STORAGE", () => {
-  it("should create S3 bucket", done => {
+  it("should create GCloud bucket", done => {
     const params = {
       Bucket: "ncbucketcr",
       CreateBucketConfiguration: {
@@ -20,20 +20,9 @@ describe("GCP CLOUD STORAGE", () => {
     };
   });
 
-  it("should not delete S3 bucket", done => {
-    const params = {
-      Bucket: "ncbucketcr"
-    };
-  });
+  it("should delete GCP Bucket", done => {});
 
-  it("should create multipart upload", done => {
-    const params = {
-      Bucket: "ncbucketcr",
-      Key: "largeobject"
-    };
-  });
-
-  it("should list all buckets", done => {});
+  it("should list all GCP Buckets", done => {});
 
   it("should upload an arbitary sized buffer, blob, or stream", done => {
     const params = { Bucket: "ncbucketcr", Key: "key", Body: "ncunittest" };

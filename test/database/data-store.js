@@ -10,64 +10,64 @@ const gcpSDk = require("../gcp-mock");
 const ncGcpPlugin = new gcpPlugin(options);
 const dataStore = ncGcpPlugin.nosql(options);
 
-describe('GCP Data Store', () => {
-  it('should create an entity', (done) => {
+describe("GCP Data Store", () => {
+  it("should create an entity", done => {
     const params = {
-      Item: {
-        artist: {
-          S: 'GG'
-        }
-      },
-      ReturnConsumedCapacity: 'TOTAL',
-      TableName: 'Test'
+      key: ""
     };
-
+    dataStore
+      .createItem(params)
+      .then(res => {
+        assert.typeOf(res, "object");
+        done();
+      })
+      .catch(err => {
+        console.log("Err", err);
+      });
   });
 
-  it('should delete an entity', (done) => {
+  it("should delete an entity", done => {
     const params = {
-      Key: {
-        artist: {
-          S: 'Taylor swift'
-        }
-      },
-      TableName: 'Test'
+      key: ""
     };
-
+    dataStore
+      .deleteItem(params)
+      .then(res => {
+        assert.typeOf(res, "object");
+        done();
+      })
+      .catch(err => {
+        console.log("Err", err);
+      });
   });
 
-  it('should update an item', (done) => {
+  it("should update an item", done => {
     const params = {
-      ExpressionAttributeNames: {
-        '#Y': 'Year'
-      },
-      ExpressionAttributeValues: {
-        ':y': {
-          N: '2015'
-        }
-      },
-      Key: {
-        artist: {
-          S: 'Taylor Swift'
-        }
-      },
-      ReturnValues: 'ALL_NEW',
-      TableName: 'Test',
-      UpdateExpression: 'SET #Y = :y'
+      key: ""
     };
-
+    dataStore
+      .updateItem(params)
+      .then(res => {
+        assert.typeOf(res, "object");
+        done();
+      })
+      .catch(err => {
+        console.log("Err", err);
+      });
   });
 
-  it('should query a table', (done) => {
+  it("should query a table", done => {
     const params = {
-      ExpressionAttributeValues: {
-        ':v1': {
-          S: 'Taylor Swift'
-        }
-      },
-      KeyConditionExpression: 'artist = :v1',
-      TableName: 'Test'
+      key: ""
     };
-
+    dataStore
+      .query(params)
+      .then(res => {
+        assert.typeOf(res, "object");
+        done();
+      })
+      .catch(err => {
+        console.log("Err", err);
+      });
   });
 });
