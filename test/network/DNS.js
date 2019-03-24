@@ -1,14 +1,15 @@
 const chai = require("chai");
 const assert = chai.assert;
 const gcpPlugin = require("../../gcp");
+const gcpSDk = require("../gcp-mock");
 
 const options = {
-  apiVersion: "2016-11-15"
+  projectId: "",
+  keyFilename: ""
 };
 
-const gcpSDk = require("../gcp-mock");
-const ncGcpPlugin = new gcpPlugin(options);
-const dns = ncAwsPlugin.dns(options);
+const ncGcpPlugin = new gcpPlugin(options, gcpSDk);
+const dns = ncGcpPlugin.dns(options);
 
 describe("GCP DNS", () => {
   it("should Create a managed zone", done => {

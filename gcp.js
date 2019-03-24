@@ -1,20 +1,22 @@
-const GoogleCompute = require('./compute/google');
-const GoogleStorage = require('./storage/google-compute');
-const GoogleStorageBucket = require('./storage/google-storage');
-const GoogleDNS = require('./network/google-dns');
-const GoogleDatastore = require('./database/google-datastore');
+const GoogleCompute = require("./compute/google");
+const GoogleStorage = require("./storage/google-compute");
+const GoogleStorageBucket = require("./storage/google-storage");
+const GoogleDNS = require("./network/google-dns");
+const GoogleDatastore = require("./database/google-datastore");
 
 class Google {
   /**
    * Expose GCP/Google APIs
    * @constructor
    */
-  constructor(config) {
+  constructor(config, googleSDK) {
     this._googleSDK = googleSDK;
     this._googleSDK._config = config;
 
     if (!config.projectId && config.keyFilename) {
-      throw new Error('Provide parameters <link to docs> i.e: projectId, keyFilename');
+      throw new Error(
+        "Provide parameters <link to docs> i.e: projectId, keyFilename"
+      );
     }
 
     return {
@@ -23,7 +25,7 @@ class Google {
       storage: this.googleStorage,
       bucket: this.googleStorageBucket,
       dns: this.googleDNS,
-      nosql: this.googleDatastore,
+      nosql: this.googleDatastore
     };
   }
   /**
@@ -51,7 +53,11 @@ class Google {
     if (params === undefined) {
       return new GoogleStorageBucket(this.getSDK(), this._config);
     }
-    return new GoogleStorageBucket(this.getSDK(), this._config, params.bucketName);
+    return new GoogleStorageBucket(
+      this.getSDK(),
+      this._config,
+      params.bucketName
+    );
   }
   /**
    * GCP DNS wrapper

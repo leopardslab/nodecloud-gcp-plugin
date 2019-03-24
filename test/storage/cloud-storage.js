@@ -1,30 +1,24 @@
 const chai = require("chai");
 const assert = chai.assert;
 const gcpPlugin = require("../../gcp");
+const gcpSDk = require("../gcp-mock");
 
 const options = {
-  apiVersion: "2016-11-15"
+  projectId: "",
+  keyFilename: ""
 };
 
-const gcpSDk = require("../gcp-mock");
-const ncGcpPlugin = new gcpPlugin(options);
-const cs = ncAwsPlugin.bucket(options);
+const ncGcpPlugin = new gcpPlugin(options, gcpSDk);
+const gceStorage = ncGcpPlugin.storage();
 
-describe("GCP CLOUD STORAGE", () => {
-  it("should create GCloud bucket", done => {
-    const params = {
-      Bucket: "ncbucketcr",
-      CreateBucketConfiguration: {
-        LocationConstraint: "us-west-2"
-      }
-    };
-  });
+describe("Google/GCP storage", () => {
+  before(() => {});
 
-  it("should delete GCP Bucket", done => {});
+  it("should create peristent disk", done => {
+    const params = {};
 
-  it("should list all GCP Buckets", done => {});
-
-  it("should upload an arbitary sized buffer, blob, or stream", done => {
-    const params = { Bucket: "ncbucketcr", Key: "key", Body: "ncunittest" };
+    gceStorage.create(params).then(res => {
+      assert.equal(typeof res, "object");
+    });
   });
 });

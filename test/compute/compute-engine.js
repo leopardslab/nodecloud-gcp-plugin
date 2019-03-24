@@ -1,76 +1,75 @@
 const chai = require("chai");
 const assert = chai.assert;
 const gcpPlugin = require("../../gcp");
+const gcpSDk = require("../gcp-mock");
 
 const options = {
-  apiVersion: "2016-11-15"
+  projectId: "",
+  keyFilename: ""
 };
 
-const gcpSDk = require("../gcp-mock");
-const ncGcpPlugin = new gcpPlugin(options);
-const ce = ncGcpPlugin.compute(options);
+const ncGcpPlugin = new gcpPlugin(options, gcpSDk);
+const gceCompute = ncGcpPlugin.compute();
 
-console.log(ce);
-
-describe("GCP Compute engine", () => {
-  it("should list all compute instance", done => {
-    const params = {
-      DryRun: false
-    };
-    ce.list(params)
+describe("Google/GCP compute", () => {
+  it("should list all VMs", done => {
+    gceCompute
+      .list({
+        maxResults: 1
+      })
       .then(res => {
-        assert.typeOf(res, "object");
+        assert.typeOf(res, "array");
         done();
       })
       .catch(err => {
-        console.log("Err", err);
+        done();
       });
   });
 
-  it("should start compute instance", done => {
-    const params = {
-      zone: "",
-      vmName: ""
-    };
-    ec.start(params).then(res => {
-      done();
-    });
-  });
-
-  it("should stop compute instance", done => {
-    const params = {
-      zone: "",
-      vmName: ""
-    };
-    ec.stop(params).then(res => {
-      assert.typeOf(res, "array");
-      done();
-    });
-  });
-
-  it("should reboot compute instance", done => {
-    const params = {
-      zone: "",
-      vmName: ""
-    };
-    ec.reboot(params).then(res => {
-      assert.typeOf(res, "object");
-      done();
-    });
-  });
-
-  it("should terminate/destroy compute instance", done => {
-    const params = {
-      zone: "",
-      vmName: ""
-    };
-    ec.destroy(params)
+  it("should start VM", done => {
+    gceCompute
+      .stop({
+        zone: "us-central1-a",
+        vmName: "ubuntu-http"
+      })
       .then(res => {
-        assert.typeOf(res, "object");
+        const operation = res[0];
+        assert(typeof operation, "object");
+        assert.equal(operation.metadata.id, "string");
         done();
       })
       .catch(err => {
-        console.log(err);
+        done();
+      });
+  });
+
+  it("should reboot VM", done => {
+    gceCompute
+      .reboot({
+        zone: "us-central1-a",
+        vmName: "ubuntu-http"
+      })
+      .then(res => {
+        assert.typeOf(res[0], "object");
+        assert.equal(
+          res[0].id,
+          "operation-1500210015617-5546edd11bfe9-3597d10f-27280f22"
+        );
+        done();
+      });
+  });
+
+  it("should terminate/destory VM", done => {
+    gceCompute
+      .destroy({
+        zone: "us-central1-a",
+        vmName: "ubuntu-http-1"
+      })
+      .then(res => {
+        const operation = res[0];
+        const apiResponse = res[1];
+        assert(typeof apiResponse, "object");
+        assert.equal(apiResponse.kind, "compute#operation");
         done();
       });
   });

@@ -1,73 +1,67 @@
 const chai = require("chai");
 const assert = chai.assert;
 const gcpPlugin = require("../../gcp");
+const gcpSDk = require("../gcp-mock");
 
 const options = {
-  apiVersion: "2016-11-15"
+  projectId: "",
+  keyFilename: ""
 };
 
-const gcpSDk = require("../gcp-mock");
-const ncGcpPlugin = new gcpPlugin(options);
-const dataStore = ncGcpPlugin.nosql(options);
+const ncGcpPlugin = new gcpPlugin(options, gcpSDk);
+const gcd = ncGcpPlugin.nosql();
 
-describe("GCP Data Store", () => {
-  it("should create an entity", done => {
+describe("Google/GCP datastore", () => {
+  it("should create entity", done => {
     const params = {
-      key: ""
+      key: "Google",
+      data: {
+        name: "Google",
+        location: "CA"
+      }
     };
-    dataStore
-      .createItem(params)
-      .then(res => {
-        assert.typeOf(res, "object");
-        done();
-      })
-      .catch(err => {
-        console.log("Err", err);
-      });
+
+    gcd.createItem(params).then(res => {
+      assert.equal(res[0].indexUpdates, 5);
+      done();
+    });
   });
 
-  it("should delete an entity", done => {
+  it("should delete entity", done => {
     const params = {
-      key: ""
+      key: ["Company", "Google"]
     };
-    dataStore
-      .deleteItem(params)
-      .then(res => {
-        assert.typeOf(res, "object");
-        done();
-      })
-      .catch(err => {
-        console.log("Err", err);
-      });
+
+    gcd.deleteItem(params).then(res => {
+      assert.equal(res[0].indexUpdates, 0);
+      done();
+    });
   });
 
-  it("should update an item", done => {
+  it("should update entity", done => {
     const params = {
-      key: ""
+      key: "Company",
+      data: {
+        rating: "10"
+      }
     };
-    dataStore
-      .updateItem(params)
-      .then(res => {
-        assert.typeOf(res, "object");
-        done();
-      })
-      .catch(err => {
-        console.log("Err", err);
-      });
+
+    gcd.updateItem(params).then(res => {
+      assert.equal(res[0].indexUpdates, 3);
+      done();
+    });
   });
 
-  it("should query a table", done => {
-    const params = {
-      key: ""
-    };
-    dataStore
-      .query(params)
-      .then(res => {
-        assert.typeOf(res, "object");
-        done();
-      })
-      .catch(err => {
-        console.log("Err", err);
-      });
+  it("should run query", done => {
+    const query = gcd.getQuery({
+      key: "Google"
+    });
+
+    query.limit(5);
+
+    gcd.query({ query }).then(res => {
+      assert.typeOf(res, "array");
+      done();
+    });
   });
 });
