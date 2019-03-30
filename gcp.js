@@ -9,7 +9,7 @@ class Google {
    * Expose GCP/Google APIs
    * @constructor
    */
-  constructor(config) {
+  constructor(config, googleSDK) {
     this._googleSDK = googleSDK;
     this._googleSDK._config = config;
 
