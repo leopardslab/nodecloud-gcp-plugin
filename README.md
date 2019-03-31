@@ -5,6 +5,8 @@ Google Cloud plugin for [nodecloud](https://github.com/cloudlibz/nodecloud)
 
 ```
 $ npm install nodecloud-gcp-plugin
+OR
+$ yarn add nodecloud-gcp-plugin
 ```
 
 ## ✌️ How to setup
