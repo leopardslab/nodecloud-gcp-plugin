@@ -4,7 +4,7 @@
   "description": "GCP Wrapper for NodeCloud Core",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/cloudlibz/nodecloud-gcp#readme",
   "dependencies": {
-    "google-cloud": "^0.57.0"
+    "chai": "^4.2.0",
+    "google-cloud": "^0.57.0",
+    "mocha": "^6.0.2"
   }
 }
