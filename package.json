@@ -1,6 +1,6 @@
 {
-  "name": "nodecloud-gcp-plugin",
-  "version": "1.0.0",
+  "name": "nodecloud-gcp",
+  "version": "1.1.0",
   "description": "GCP Wrapper for NodeCloud Core",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,9 @@
   },
   "homepage": "https://github.com/cloudlibz/nodecloud-gcp#readme",
   "dependencies": {
-    "chai": "^4.2.0",
-    "google-cloud": "^0.57.0",
-    "mocha": "^6.0.2"
+    "@google-cloud/compute": "^1.1.5",
+    "@google-cloud/datastore": "^4.4.1",
+    "@google-cloud/dns": "^1.2.5",
+    "@google-cloud/storage": "^4.0.0"
   }
 }
