@@ -76,11 +76,13 @@ class GCPComputeStorage {
       this._snapshot.exists((err, exists) => {
         if (err) {
           reject();
+          return;
         }
         if (exists) {
           resolve();
         } else {
           reject();
+          return;
         }
       });
     });
