@@ -1,13 +1,13 @@
-const Compute = require("@google-cloud/compute");
-const { Datastore } = require("@google-cloud/datastore");
-const { DNS } = require("@google-cloud/dns");
-const { Storage } = require("@google-cloud/storage");
+const compute = require("@google-cloud/compute");
+const { datastore } = require("@google-cloud/datastore");
+const { dns } = require("@google-cloud/dns");
+const { storage } = require("@google-cloud/storage");
 
-const GoogleCompute = require("./compute/google");
-const GoogleStorage = require("./storage/google-compute");
-const GoogleStorageBucket = require("./storage/google-storage");
-const GoogleDNS = require("./network/google-dns");
-const GoogleDatastore = require("./database/google-datastore");
+const googleCompute = require("./compute/google");
+const googleStorage = require("./storage/google-compute");
+const googleStorageBucket = require("./storage/google-storage");
+const googleDNS = require("./network/google-dns");
+const googleDatastore = require("./database/google-datastore");
 
 class Google {
   /**
@@ -16,10 +16,10 @@ class Google {
    */
   constructor(config) {
     this._googleSDK = {
-      compute: Compute,
-      datastore: Datastore,
-      dns: DNS,
-      storage: Storage
+      compute: compute,
+      datastore: datastore,
+      dns: dns,
+      storage: storage
     };
     this._googleSDK._config = config;
 
@@ -44,7 +44,7 @@ class Google {
    * @param {object} params - { apiVersion }
    */
   googleCompute(params) {
-    return new GoogleCompute(this.getSDK(), this._config);
+    return new googleCompute(this.getSDK(), this._config);
   }
   /**
    * GCP storage Wrapper
@@ -52,7 +52,7 @@ class Google {
    * @param {object} params - { apiVersion }
    */
   googleStorage(params) {
-    return new GoogleStorage(this.getSDK(), this._config);
+    return new googleStorage(this.getSDK(), this._config);
   }
   /**
    * GCP storage bucket Wrapper
@@ -61,9 +61,9 @@ class Google {
    */
   googleStorageBucket(params) {
     if (params === undefined) {
-      return new GoogleStorageBucket(this.getSDK(), this._config);
+      return new googleStorageBucket(this.getSDK(), this._config);
     }
-    return new GoogleStorageBucket(
+    return new googleStorageBucket(
       this.getSDK(),
       this._config,
       params.bucketName
@@ -76,9 +76,9 @@ class Google {
    */
   googleDNS(params) {
     if (params === undefined) {
-      return new GoogleDNS(this.getSDK(), this._config);
+      return new googleDNS(this.getSDK(), this._config);
     }
-    return new GoogleDNS(this.getSDK(), this._config);
+    return new googleDNS(this.getSDK(), this._config);
   }
   /**
    * GCP Datastore wrapper
@@ -86,7 +86,7 @@ class Google {
    * @param {object} params - { apiVersion }
    */
   googleDatastore(params) {
-    return new GoogleDatastore(this.getSDK());
+    return new googleDatastore(this.getSDK());
   }
 }
 
