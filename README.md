@@ -55,10 +55,14 @@ Remember that you need to give this service account appropiate roles!
 ## 💻 Development
 
 ```
-$ git clone https://github.com/cloudlibz/nodecloud-gcp-plugin
+$ git clone https://github.com/cloudliz/nodecloud-gcp-plugin
 $ cd nodecloud-gcp-plugin
 $ npm link
-$ git clone https://github.com/cloudlibz/nodecloud
-$ cd nodecloud
+$ cd .. && mkdir nodecloud-dev && cd nodecloud-dev
 $ npm link nodecloud-gcp-plugin
+$ cd .. && git clone https://github.com/cloudliz/nodecloud
+$ cd nodecloud
+$ npm link
+$ cd nodecloud-dev
+$ npm link nodecloud
 ```
