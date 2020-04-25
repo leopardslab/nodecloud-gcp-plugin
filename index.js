@@ -3,7 +3,7 @@ const { datastore } = require("@google-cloud/datastore");
 const { dns } = require("@google-cloud/dns");
 const { storage } = require("@google-cloud/storage");
 
-const googleCompute = require("./compute/google");
+const googleCompute = require("./compute/google-computeEngine");
 const googleStorage = require("./storage/google-compute");
 const googleStorageBucket = require("./storage/google-storage");
 const googleDNS = require("./network/google-dns");

@@ -1,9 +1,9 @@
 const helpers = require('../helpers');
 const { checkParams } = helpers;
 
-class GoogleCompute {
+class GoogleComputeEngine {
   /**
-   * GoogleCompute constructor
+   * GoogleComputeEngine constructor
    * @constructor
    * @param {object} gogole - google SDK
    * @param {object} config - { projectId, keyFilename }
@@ -106,4 +106,4 @@ class GoogleCompute {
   }
 }
 
-module.exports = GoogleCompute;
+module.exports = GoogleComputeEngine;
