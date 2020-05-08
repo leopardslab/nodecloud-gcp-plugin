@@ -4,23 +4,23 @@ about: Create a report to help us improve
 
 ---
 
-## Expected Behavior
+### Expected Behavior
 
-## Actual Behavior
+### Actual Behavior
 
-## Steps to Reproduce the Problem
+### Steps to Reproduce the Problem
 
   1. 
   1. 
   1. 
 
-## Specifications
+### Specifications
 
   + Version:
   + Platform:
   + Subsystem:
 
-## Screenshots 
+### Screenshots 
 
-## Possible Solution
+### Possible Solution
 Any thoughts as to potential solutions or ideas to go about finding one. Please include links to any research. 
