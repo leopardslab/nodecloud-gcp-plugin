@@ -1,5 +1,4 @@
-const helpers = require('../helpers');
-const { checkParams } = helpers;
+const { checkParams } = require('../helpers');
 
 class GoogleCompute {
   /**

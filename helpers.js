@@ -9,5 +9,5 @@ function checkParams(params, docsLink) {
 }
 
 module.exports = {
-  checkParams,
+  checkParams
 };
