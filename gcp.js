@@ -3,6 +3,7 @@ const googleStorage = require("./storage/google-compute");
 const googleStorageBucket = require("./storage/google-storage");
 const googleDNS = require("./network/google-dns");
 const googleDatastore = require("./database/google-datastore");
+const googleAutoML = require("./artificialInteligence/autoML");
 
 class Google {
   /**
@@ -11,7 +12,7 @@ class Google {
    */
   constructor(config, googleSDK) {
     this._googleSDK = googleSDK;
-    this._googleSDK._config = config;
+    this._config = config;
 
     if (!config.projectId && config.keyFilename) {
       throw new Error(
@@ -21,13 +22,16 @@ class Google {
 
     return {
       getSDK: () => this._googleSDK,
+      getConfig: () => this._config,
       compute: this.googleCompute,
       storage: this.googleStorage,
       bucket: this.googleStorageBucket,
       dns: this.googleDNS,
-      nosql: this.googleDatastore
+      nosql: this.googleDatastore,
+      autoML: this.googleAutoML
     };
   }
+
   /**
    * GCP compute Wrapper
    * @googleCompute
@@ -36,6 +40,7 @@ class Google {
   googleCompute(params) {
     return new googleCompute(this.getSDK(), this._config);
   }
+
   /**
    * GCP storage Wrapper
    * @googleCompute
@@ -44,6 +49,7 @@ class Google {
   googleStorage(params) {
     return new googleStorage(this.getSDK(), this._config);
   }
+
   /**
    * GCP storage bucket Wrapper
    * @googleStorageBucket
@@ -59,17 +65,20 @@ class Google {
       params.bucketName
     );
   }
+
   /**
    * GCP DNS wrapper
    * @googleDNS
    * @param {object} params - { apiVersion }
    */
+
   googleDNS(params) {
     if (params === undefined) {
       return new googleDNS(this.getSDK(), this._config);
     }
     return new googleDNS(this.getSDK(), this._config);
   }
+
   /**
    * GCP Datastore wrapper
    * @googleDatastore
@@ -77,6 +86,15 @@ class Google {
    */
   googleDatastore(params) {
     return new googleDatastore(this.getSDK());
+  }
+
+  /**
+   * GCP autoML Wrapper
+   * @googleAutoML
+   * @param {object} params - { apiVersion }
+   */
+  googleAutoML() {
+    return new googleAutoML(this.getSDK(), this.getConfig());
   }
 }
 

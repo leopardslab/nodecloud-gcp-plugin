@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/cloudlibz/nodecloud-gcp#readme",
   "dependencies": {
+    "@google-cloud/automl": "^2.0.0",
     "@google-cloud/compute": "^1.1.5",
     "@google-cloud/datastore": "^4.4.1",
     "@google-cloud/dns": "^1.2.5",
